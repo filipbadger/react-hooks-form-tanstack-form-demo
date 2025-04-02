@@ -38,34 +38,27 @@ export const useFormController = () => {
         attributes: []
     }
 
-    const { control, handleSubmit, watch, setValue } = useForm<FormData>({
+    const { control, handleSubmit, setValue, getValues } = useForm<FormData>({
         defaultValues,
         resolver: zodResolver(validationSchema),
         mode: 'all'
     });
 
-    const type = watch("type");
-    const attributes = watch("attributes") as string[];
-
     const addAttribute = () => {
-        if (type === "person") {
-            setValue("attributes", [...(attributes || []), ""]);
-        }
+        const currentAttributes = getValues("attributes") as string[];
+        setValue("attributes", [...currentAttributes, ""]);
     };
 
     const removeAttribute = (index: number) => {
-        if (type === "person") {
-            const newAttributes = attributes.filter((_, i) => i !== index);
-            setValue("attributes", newAttributes);
-        }
+        const currentAttributes = getValues("attributes") as string[];
+        setValue("attributes", currentAttributes.filter((_, i) => i !== index));
     };
 
     const updateAttribute = (index: number, value: string) => {
-        if (type === "person") {
-            const newAttributes = [...attributes];
-            newAttributes[index] = value;
-            setValue("attributes", newAttributes);
-        }
+        const currentAttributes = getValues("attributes") as string[];
+        const newAttributes = [...currentAttributes];
+        newAttributes[index] = value;
+        setValue("attributes", newAttributes);
     };
 
     const onSubmit = (data: FormData) => {
@@ -75,11 +68,9 @@ export const useFormController = () => {
     return { 
         control, 
         handleSubmit, 
-        onSubmit, 
-        type,
+        onSubmit,
         addAttribute,
         removeAttribute,
-        updateAttribute,
-        attributes
+        updateAttribute
     };
 } 

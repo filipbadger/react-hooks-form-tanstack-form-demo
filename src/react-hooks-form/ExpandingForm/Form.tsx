@@ -8,12 +8,10 @@ export const Form = () => {
     const { 
         control, 
         handleSubmit, 
-        onSubmit, 
-        type,
+        onSubmit,
         addAttribute,
         removeAttribute,
-        updateAttribute,
-        attributes
+        updateAttribute
     } = useFormController();
     
     return (
@@ -35,19 +33,27 @@ export const Form = () => {
                 )}
             />
 
-            {type === "person" && (
-                <Controller
-                    control={control}
-                    name="name"
-                    render={({ field }) => (
-                        <TextField 
-                            label="Name" 
-                            required
-                            {...field} 
-                        />
-                    )}
-                />
-            )}
+            <Controller
+                control={control}
+                name="type"
+                render={({ field }) => (
+                    <>
+                        {field.value === "person" && (
+                            <Controller
+                                control={control}
+                                name="name"
+                                render={({ field }) => (
+                                    <TextField 
+                                        label="Name" 
+                                        required
+                                        {...field} 
+                                    />
+                                )}
+                            />
+                        )}
+                    </>
+                )}
+            />
 
             <Controller
                 control={control}
@@ -61,33 +67,49 @@ export const Form = () => {
                 )}
             />
 
-            {type === "person" && (
-                <Stack spacing={2}>
-                    <Stack direction="row" spacing={1} alignItems="center">
-                        <Typography variant="subtitle1">Attributes</Typography>
-                        <IconButton onClick={addAttribute} color="primary">
-                            <AddIcon />
-                        </IconButton>
-                    </Stack>
-                    
-                    {attributes?.length > 0 && attributes.map((_, index) => (
-                        <Stack key={index} direction="row" spacing={1} alignItems="center">
-                            <TextField
-                                fullWidth
-                                label={`Attribute ${index + 1}`}
-                                value={attributes[index]}
-                                onChange={(e) => updateAttribute(index, e.target.value)}
-                            />
-                            <IconButton 
-                                onClick={() => removeAttribute(index)}
-                                color="error"
-                            >
-                                <DeleteIcon />
-                            </IconButton>
-                        </Stack>
-                    ))}
-                </Stack>
-            )}
+            <Controller
+                control={control}
+                name="type"
+                render={({ field }) => (
+                    <>
+                        {field.value === "person" && (
+                            <Stack spacing={2}>
+                                <Stack direction="row" spacing={1} alignItems="center">
+                                    <Typography variant="subtitle1">Attributes</Typography>
+                                    <IconButton onClick={addAttribute} color="primary">
+                                        <AddIcon />
+                                    </IconButton>
+                                </Stack>
+                                
+                                <Controller
+                                    control={control}
+                                    name="attributes"
+                                    render={({ field }) => (
+                                        <>
+                                            {field.value?.map((_, index) => (
+                                                <Stack key={index} direction="row" spacing={1} alignItems="center">
+                                                    <TextField
+                                                        fullWidth
+                                                        label={`Attribute ${index + 1}`}
+                                                        value={field.value[index]}
+                                                        onChange={(e) => updateAttribute(index, e.target.value)}
+                                                    />
+                                                    <IconButton 
+                                                        onClick={() => removeAttribute(index)}
+                                                        color="error"
+                                                    >
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </Stack>
+                                            ))}
+                                        </>
+                                    )}
+                                />
+                            </Stack>
+                        )}
+                    </>
+                )}
+            />
 
             <Button 
                 type="submit" 
