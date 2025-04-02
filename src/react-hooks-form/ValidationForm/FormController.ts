@@ -21,7 +21,8 @@ export const useFormController = () => {
 
     const { control, handleSubmit, formState: { isValid } } = useForm<FormData>({
         defaultValues,
-        resolver: zodResolver(validationSchema)
+        resolver: zodResolver(validationSchema),
+        mode: 'all'
     });
 
     const onSubmit = (data: FormData) => {

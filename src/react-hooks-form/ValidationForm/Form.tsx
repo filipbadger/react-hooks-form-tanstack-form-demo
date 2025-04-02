@@ -13,6 +13,7 @@ export const Form = () => {
                 render={({ field }) => (
                     <TextField 
                         label="Name" 
+                        required
                         {...field} 
                     />
                 )}
@@ -23,7 +24,8 @@ export const Form = () => {
                 render={({ field }) => (
                     <TextField 
                         label="Email" 
-                        {...field} 
+                        required
+                        {...field}
                     />
                 )}
             />

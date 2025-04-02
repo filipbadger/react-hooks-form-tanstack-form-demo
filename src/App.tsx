@@ -4,6 +4,8 @@ import { Typography, Box, Tabs, Tab } from "@mui/material"
 import { Divider } from "@mui/material"
 import { Form as TanstackValidationForm } from "./tanstack-form/ValidationForm/Form"
 import { Form as ReactHookFormValidationForm } from "./react-hooks-form/ValidationForm/Form"
+import { Form as ReactHookFormDynamicForm } from "./react-hooks-form/DynamicForm/Form"
+import { Form as TanstackDynamicForm } from "./tanstack-form/DynamicForm/Form"
 import { useState } from "react"
 
 interface TabPanelProps {
@@ -46,6 +48,7 @@ function App() {
         >
           <Tab label="Simple Form" />
           <Tab label="Validation Form" />
+          <Tab label="Dynamic Form" />
         </Tabs>
       </Box>
 
@@ -65,6 +68,9 @@ function App() {
           <CustomTabPanel value={activeTab} index={1}>
             <ReactHookFormValidationForm />
           </CustomTabPanel>
+          <CustomTabPanel value={activeTab} index={2}>
+            <ReactHookFormDynamicForm />
+          </CustomTabPanel>
         </Box>
 
         <Divider orientation="vertical" flexItem />
@@ -76,6 +82,9 @@ function App() {
           </CustomTabPanel>
           <CustomTabPanel value={activeTab} index={1}>
             <TanstackValidationForm />
+          </CustomTabPanel>
+          <CustomTabPanel value={activeTab} index={2}>
+            <TanstackDynamicForm />
           </CustomTabPanel>
         </Box>
       </Box>

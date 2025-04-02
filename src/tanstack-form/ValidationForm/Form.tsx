@@ -18,6 +18,7 @@ export const Form = () => {
                             error={!!error}
                             helperText={error ? String(error) : undefined}
                             fullWidth
+                            required
                         />
                     )
                 }
@@ -32,6 +33,7 @@ export const Form = () => {
                         error={!!error}
                         helperText={error ? String(error) : undefined}
                         fullWidth
+                        required
                     />
                 )
             }} />
