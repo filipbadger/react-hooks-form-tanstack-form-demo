@@ -6,6 +6,8 @@ import { Form as TanstackValidationForm } from "./tanstack-form/ValidationForm/F
 import { Form as ReactHookFormValidationForm } from "./react-hooks-form/ValidationForm/Form"
 import { Form as ReactHookFormDynamicForm } from "./react-hooks-form/DynamicForm/Form"
 import { Form as TanstackDynamicForm } from "./tanstack-form/DynamicForm/Form"
+import { Form as ReactHookFormExpandingForm } from "./react-hooks-form/ExpandingForm/Form"
+import { Form as TanstackExpandingForm } from "./tanstack-form/ExpandingForm/Form"
 import { useState } from "react"
 
 interface TabPanelProps {
@@ -49,6 +51,7 @@ function App() {
           <Tab label="Simple Form" />
           <Tab label="Validation Form" />
           <Tab label="Dynamic Form" />
+          <Tab label="Expanding Form" />
         </Tabs>
       </Box>
 
@@ -71,6 +74,9 @@ function App() {
           <CustomTabPanel value={activeTab} index={2}>
             <ReactHookFormDynamicForm />
           </CustomTabPanel>
+          <CustomTabPanel value={activeTab} index={3}>
+            <ReactHookFormExpandingForm />
+          </CustomTabPanel>
         </Box>
 
         <Divider orientation="vertical" flexItem />
@@ -85,6 +91,9 @@ function App() {
           </CustomTabPanel>
           <CustomTabPanel value={activeTab} index={2}>
             <TanstackDynamicForm />
+          </CustomTabPanel>
+          <CustomTabPanel value={activeTab} index={3}>
+            <TanstackExpandingForm />
           </CustomTabPanel>
         </Box>
       </Box>
